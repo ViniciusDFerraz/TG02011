@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>História – TG 02 011 Capivari</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --verde: #1B3A2D;
+    --verde-medio: #2D5C42;
+    --dourado: #B8973A;
+    --dourado-claro: #D4AF58;
+    --creme: #F5F0E8;
+    --cinza: #8A8A8A;
+    --branco: #FFFFFF;
+    --preto: #0E0E0E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--preto); color: var(--creme); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14,14,14,0.96); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(184,151,58,0.2);
+    padding: 1rem 2rem; display: flex; align-items: center; gap: 2rem;
+  }
+  nav a {
+    font-family: 'Oswald', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--cinza); text-decoration: none; transition: color 0.2s;
+  }
+  nav a:hover { color: var(--dourado); }
+  nav a.logo { color: var(--dourado-claro); font-size: 1rem; margin-right: auto; }
+
+  /* CABEÇALHO */
+  .page-header {
+    padding: 5rem 2rem 3rem; max-width: 860px; margin: 0 auto;
+    border-bottom: 1px solid rgba(184,151,58,0.15);
+  }
+  .breadcrumb { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cinza); margin-bottom: 1.2rem; }
+  .breadcrumb a { color: var(--dourado); text-decoration: none; }
+  .page-titulo { font-family: 'Oswald', sans-serif; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 700; color: var(--branco); line-height: 1; }
+  .page-titulo span { color: var(--dourado); }
+
+  /* TEXTO */
+  #texto-historia { max-width: 860px; margin: 0 auto; padding: 3.5rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .historia-label {
+    font-family: 'Oswald', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.26em; text-transform: uppercase; color: var(--dourado); margin-bottom: 1.5rem;
+  }
+  .historia-texto {
+    font-family: 'Source Serif 4', serif; font-size: clamp(1rem, 1.6vw, 1.15rem);
+    font-weight: 300; line-height: 1.9; color: var(--creme); opacity: 0.88;
+  }
+  .historia-texto p + p { margin-top: 1.2rem; }
+
+  /* ── CARROSSEL GENÉRICO (reutilizado para Momentos e Locais) ── */
+  .carrossel-bloco { padding: 4rem 0 5rem; position: relative; }
+  .carrossel-bloco.fundo-escuro { background: #0d0d0d; }
+  .carrossel-bloco.fundo-medio  { background: #111; }
+
+  .carrossel-header {
+    max-width: 860px; margin: 0 auto 2.5rem; padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .carrossel-label {
+    font-family: 'Oswald', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.26em; text-transform: uppercase; color: var(--dourado);
+  }
+  .carrossel-controles { display: flex; align-items: center; gap: 1rem; }
+  .carrossel-contador {
+    font-family: 'Oswald', sans-serif; font-size: 0.85rem;
+    color: var(--cinza); letter-spacing: 0.1em; min-width: 50px; text-align: center;
+  }
+  .btn-seta {
+    width: 44px; height: 44px; border: 1px solid rgba(184,151,58,0.35);
+    background: transparent; color: var(--dourado); font-size: 1.1rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s, color 0.2s; flex-shrink: 0;
+  }
+  .btn-seta:hover { background: var(--dourado); color: var(--preto); border-color: var(--dourado); }
+  .btn-seta:disabled { opacity: 0.25; cursor: default; }
+  .btn-seta:disabled:hover { background: transparent; color: var(--dourado); border-color: rgba(184,151,58,0.35); }
+
+  .carrossel-viewport { overflow: hidden; width: 100%; }
+  .carrossel-faixa { display: flex; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+
+  .slide { flex: 0 0 100%; padding: 0 2rem; display: flex; justify-content: center; }
+  .slide-inner { width: 100%; max-width: 860px; display: flex; flex-direction: column; gap: 1.2rem; }
+
+  /* Foto nos slides de Momentos (16/9) */
+  .slide-foto-h {
+    width: 100%; aspect-ratio: 16/9; overflow: hidden;
+    border: 1px solid rgba(184,151,58,0.15); background: var(--verde);
+  }
+  .slide-foto-h img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Foto nos slides de Locais (mais quadrada / panorâmica) */
+  .slide-foto-l {
+    width: 100%; aspect-ratio: 4/3; overflow: hidden;
+    border: 1px solid rgba(184,151,58,0.15); background: var(--verde-medio);
+  }
+  .slide-foto-l img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .slide-legenda {
+    font-family: 'Source Serif 4', serif; font-style: italic;
+    font-size: 0.88rem; color: var(--cinza); line-height: 1.6;
+    border-left: 2px solid var(--dourado); padding-left: 1rem;
+  }
+
+  .carrossel-dots {
+    display: flex; justify-content: center; gap: 0.5rem;
+    margin-top: 2.5rem; padding: 0 2rem;
+  }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(184,151,58,0.25); cursor: pointer;
+    transition: background 0.2s, transform 0.2s; border: none;
+  }
+  .dot.ativo { background: var(--dourado); transform: scale(1.4); }
+
+  /* RODAPÉ */
+  footer {
+    background: #070707; border-top: 1px solid rgba(184,151,58,0.12);
+    padding: 2.5rem 2rem; text-align: center;
+  }
+  .footer-aviso {
+    font-size: 0.78rem; color: var(--cinza); line-height: 1.7;
+    max-width: 640px; margin: 0 auto; letter-spacing: 0.02em;
+  }
+  .footer-aviso strong { color: rgba(255,255,255,0.35); font-weight: 500; }
+  .footer-linha { width: 40px; height: 1px; background: rgba(184,151,58,0.2); margin: 0 auto 1.2rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="index.html">TG 02 011</a>
+  <a href="index.html">← Início</a>
+</nav>
+
+<!-- CABEÇALHO -->
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Início</a> › História</div>
+  <div class="page-titulo">Nossa <span>História</span></div>
+</div>
+
+<!-- TEXTO DA HISTÓRIA -->
+<section id="texto-historia">
+  <div class="historia-label">Sobre o TG 02 011</div>
+  <div class="historia-texto">
+    <p>O Tiro de Guerra 02-011 de Capivari faz parte de uma história construída ao longo de um século de dedicação à formação cívica e militar de gerações de brasileiros. Como um Tiro de Guerra centenário, figura entre os mais antigos do país, preservando tradições que atravessam décadas sem perder sua relevância para a sociedade e para o Exército Brasileiro.    
+    <p>Ao longo de sua existência, o TG 02-011 consolidou uma identidade baseada em valores que moldam não apenas o soldado, mas também o cidadão. A disciplina, o trabalho árduo, o companheirismo e o espírito de corpo sempre estiveram presentes em sua rotina, formando homens preparados para enfrentar desafios com responsabilidade, respeito e compromisso com o bem comum.   
+   <p>Cada turma que passou por suas fileiras contribuiu para fortalecer esse legado, escrevendo um novo capítulo na história da instituição sem jamais esquecer aqueles que vieram antes. Mais do que um local de instrução militar, o Tiro de Guerra 02-011 representa uma escola de caráter, onde o exemplo, a dedicação e o senso de dever continuam sendo transmitidos de geração em geração.
+   <p>Essa trajetória centenária é simbolo da formação de jovens para a vida militar e cívica.</p>
+   <p></p>
+  </div>
+</section>
+
+<!-- ═══ CARROSSEL: MOMENTOS HISTÓRICOS ═══ -->
+<div class="carrossel-bloco fundo-escuro">
+
+  <div class="carrossel-header">
+    <div class="carrossel-label">Momentos Históricos</div>
+    <div class="carrossel-controles">
+      <button class="btn-seta" id="mh-prev" aria-label="Anterior">&#8592;</button>
+      <div class="carrossel-contador" id="mh-contador">1 / 5</div>
+      <button class="btn-seta" id="mh-next" aria-label="Próximo">&#8594;</button>
+    </div>
+  </div>
+
+  <div class="carrossel-viewport">
+    <div class="carrossel-faixa" id="mh-faixa">
+
+      <div class="slide"><div class="slide-inner">
+        <div class="slide-foto-h"><img src="fotos/coleg.jpg" alt="Momento histórico 1"></div>
+        <div class="slide-legenda">1917 - Ano em que foi fundado o Tiro de Guerra 603. Sua sede sendo o coleginho, que continuara a ser usado até o periodo em que o TG se renova com nome de TG 015</div>
+      </div></div>
+
+      <div class="slide"><div class="slide-inner">
+        <div class="slide-foto-h"><img src="fotos/tg.png" alt="Momento histórico 2"></div>
+        <div class="slide-legenda">1964 - Inauguração da sede atual do Tiro de Guerra 02-011</div>
+      </div></div>
+
+
+    </div>
+  </div>
+
+  <div class="carrossel-dots" id="mh-dots"></div>
+</div>
+
+
+<div class="carrossel-bloco fundo-medio">
+
+ 
+
+<!-- RODAPÉ -->
+<footer>
+  <div class="footer-linha"></div>
+  <p class="footer-aviso">
+    <strong>Aviso:</strong> Este site é de caráter informativo, criado por iniciativa particular.
+    <strong>Não possui qualquer vínculo oficial com o Exército Brasileiro</strong>
+  </p>
+</footer>
+
+<script>
+  function criarCarrossel(prefixo) {
+    const faixa    = document.getElementById(prefixo + '-faixa');
+    const btnPrev  = document.getElementById(prefixo + '-prev');
+    const btnNext  = document.getElementById(prefixo + '-next');
+    const contador = document.getElementById(prefixo + '-contador');
+    const dotsEl   = document.getElementById(prefixo + '-dots');
+    const slides   = faixa.querySelectorAll('.slide');
+    const total    = slides.length;
+    let atual      = 0;
+
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'dot' + (i === 0 ? ' ativo' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i + 1));
+      d.onclick = () => ir(i);
+      dotsEl.appendChild(d);
+    });
+
+    function ir(idx) {
+      atual = idx;
+      faixa.style.transform = `translateX(-${atual * 100}%)`;
+      contador.textContent  = `${atual + 1} / ${total}`;
+      btnPrev.disabled = atual === 0;
+      btnNext.disabled = atual === total - 1;
+      dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('ativo', i === atual));
+    }
+
+    btnPrev.addEventListener('click', () => { if (atual > 0)         ir(atual - 1); });
+    btnNext.addEventListener('click', () => { if (atual < total - 1) ir(atual + 1); });
+
+    ir(0);
+  }
+
+  criarCarrossel('mh'); // Momentos Históricos
+  criarCarrossel('lc'); // Locais
+</script>
+
+</body>
+</html>

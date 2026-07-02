@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turma 2026 – TG 02 011 Capivari</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --verde: #1B3A2D;
+    --verde-medio: #2D5C42;
+    --verde-claro: #4A8C65;
+    --dourado: #B8973A;
+    --dourado-claro: #D4AF58;
+    --creme: #F5F0E8;
+    --cinza: #8A8A8A;
+    --branco: #FFFFFF;
+    --preto: #0E0E0E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--preto); color: var(--creme); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14,14,14,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(184,151,58,0.2);
+    padding: 1rem 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+  nav a {
+    font-family: 'Oswald', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--cinza); text-decoration: none; transition: color 0.2s;
+  }
+  nav a:hover { color: var(--dourado); }
+  nav a.nav-logo { color: var(--dourado-claro); font-size: 1rem; margin-right: auto; }
+
+  /* FOTO TURMA */
+  #foto-turma {
+    width: 100%; max-height: 520px; min-height: 320px;
+    position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+    background: var(--verde);
+  }
+  #foto-turma img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .foto-turma-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem;
+    background: linear-gradient(to top, rgba(11,20,14,0.9) 0%, transparent 100%);
+    display: flex; align-items: flex-end;
+  }
+  .foto-turma-titulo {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 8vw, 4rem); font-weight: 700; color: var(--branco);
+  }
+  .foto-turma-titulo span { color: var(--dourado); }
+
+  /* SEÇÕES */
+  section { padding: 4rem 2rem; }
+
+  .secao-titulo {
+    font-family: 'Oswald', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.28em; text-transform: uppercase; color: var(--dourado);
+    margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;
+  }
+  .secao-titulo::after { content: ''; flex: 1; height: 1px; background: rgba(184,151,58,0.2); }
+
+  /* SECRETÁRIOS */
+  #secretarios { background: #141414; }
+  .secretarios-lista { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+  .secretario-card {
+    display: flex; align-items: center; gap: 1rem;
+    min-width: 220px; flex: 1; max-width: 300px;
+  }
+  .secretario-card img {
+    width: 64px; height: 80px; object-fit: cover; flex-shrink: 0;
+    border: 1px solid rgba(184,151,58,0.25); display: block;
+  }
+  .secretario-nome {
+    font-family: 'Oswald', sans-serif; font-size: 1rem;
+    font-weight: 400; color: var(--branco); line-height: 1.3;
+  }
+  .secretario-cargo { font-size: 0.72rem; color: var(--cinza); letter-spacing: 0.06em; margin-top: 0.2rem; }
+
+  /* AÇÕES E OPERAÇÕES */
+  #acoes-operacoes { background: var(--preto); }
+  .acoes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  @media(max-width: 600px) { .acoes-grid { grid-template-columns: 1fr; } }
+  .acao-bloco {
+    text-decoration: none; display: block;
+    border: 1px solid rgba(184,151,58,0.25);
+    transition: border-color 0.25s, transform 0.25s; overflow: hidden;
+  }
+  .acao-bloco:hover { border-color: var(--dourado); transform: translateY(-3px); }
+  .acao-img-wrap { width: 100%; aspect-ratio: auto; overflow: hidden; }
+  .acao-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .acao-corpo { padding: 1.2rem 1.5rem 1.5rem; }
+  .acao-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dourado); margin-bottom: 0.4rem; }
+  .acao-titulo { font-family: 'Oswald', sans-serif; font-size: 1.5rem; color: var(--branco); font-weight: 600; }
+  .acao-seta { margin-top: 0.8rem; font-size: 0.75rem; color: var(--cinza); letter-spacing: 0.1em; }
+
+  /* DESTAQUES DO MÊS */
+  #destaques { background: var(--preto); }
+  .meses-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1.2rem; }
+  .mes-card { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+  .mes-card img {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
+    border: 1px solid rgba(184,151,58,0.2);
+  }
+  .mes-label {
+    font-family: 'Oswald', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--dourado);
+  }
+
+  /* CABOS E AUXILIARES */
+  #cabos-auxiliares { background: #141414; }
+  .cabos-auxiliares-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  @media(max-width: 580px) { .cabos-auxiliares-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  .subsecao-titulo {
+    font-family: 'Oswald', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--dourado);
+    margin-bottom: 1.2rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(184,151,58,0.2);
+  }
+  .posto-lista { display: flex; flex-direction: column; gap: 0.8rem; }
+  .posto-item { display: flex; align-items: center; gap: 0.9rem; }
+  .posto-item img {
+    width: 52px; height: 66px; object-fit: cover; flex-shrink: 0;
+    border: 1px solid rgba(184,151,58,0.18); display: block;
+  }
+  .posto-nome { font-size: 0.88rem; color: var(--creme); line-height: 1.3; }
+
+  /* ATIRADORES */
+  #atiradores { background: var(--preto); }
+  .atiradores-lista {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .atirador-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-right: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.15s;
+  }
+  .atirador-item:hover { background: rgba(255,255,255,0.03); }
+  .atirador-num {
+    font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 600;
+    color: var(--dourado); width: 28px; flex-shrink: 0; text-align: right;
+  }
+  .atirador-item img {
+    width: 44px; height: 56px; object-fit: cover; flex-shrink: 0;
+    border: 1px solid rgba(184,151,58,0.15); display: block;
+  }
+  .atirador-nome { font-size: 0.88rem; color: var(--creme); font-weight: 400; line-height: 1.3; }
+
+img {
+    cursor: zoom-in;
+}
+
+/* Modal */
+#imageModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.92);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    animation: fade .2s;
+}
+
+#imageModal img {
+    max-width: 92%;
+    max-height: 92%;
+    object-fit: contain;
+    cursor: default;
+    box-shadow: 0 0 30px rgba(0,0,0,.5);
+}
+
+#imageModal span {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 42px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+}
+
+@keyframes fade {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">TG 02 011</a>
+  <a href="#secretarios">Secretários</a>
+  <a href="#acoes-operacoes">Ações & Ops</a>
+  <a href="#destaques">Destaques</a>
+  <a href="#cabos-auxiliares">Cabos & Auxiliares</a>
+  <a href="#atiradores">Atiradores</a>
+</nav>
+
+<!-- FOTO TURMA -->
+<div id="foto-turma">
+  <img src="2026/turma2026.jpeg" alt="">
+  <div class="foto-turma-overlay">
+    <div class="foto-turma-titulo">Turma <span>2026</span></div>
+  </div>
+</div>
+
+<!-- SECRETÁRIOS -->
+<section id="secretarios">
+  <div class="secao-titulo">Membros</div>
+  <div class="secretarios-lista">
+    <div class="secretario-card">
+      <img src="2026/secretario.png" alt="">
+      <div><div class="secretario-nome">Felipe Piazza</div><div class="secretario-cargo">Secretário</div></div>
+    </div>
+  <div class="secretarios-lista">
+    <div class="secretario-card">
+      <img src="2026/diretor.png" alt="">
+      <div><div class="secretario-nome">Prefeito Vitor Hugo Riccomini</div><div class="secretario-cargo">Diretor</div></div>
+    </div>
+</section>
+
+<!-- AÇÕES CÍVICAS & OPERAÇÕES -->
+<section id="acoes-operacoes">
+  <div class="secao-titulo">Atividades</div>
+  <div class="acoes-grid">
+    <a class="acao-bloco" href="acoes-civicas-2026.html">
+      <div class="acao-img-wrap"><img src="2026/ac.png" alt=""></div>
+      <div class="acao-corpo">
+        <div class="acao-label">Turma 2026</div>
+        <div class="acao-titulo">Ações Cívicas</div>
+        <div class="acao-seta">Ver 2026 →</div>
+      </div>
+    </a>
+    <a class="acao-bloco" href="operacoes-2026.html">
+      <div class="acao-img-wrap"><img src="2026/ops.png" alt=""></div>
+      <div class="acao-corpo">
+        <div class="acao-label">Turma 2026</div>
+        <div class="acao-titulo">Operações</div>
+        <div class="acao-seta">Ver 2026 →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- DESTAQUES DO MÊS -->
+<section id="destaques">
+  <div class="secao-titulo">Destaques do Mês</div>
+  <div class="meses-grid">
+    <div class="mes-card"><img src="2026/Destaque_Março.jpeg" alt=""><div class="mes-label">Março</div></div>
+    <div class="mes-card"><img src="2026/Destaque_Abril.jpeg" alt=""><div class="mes-label">Abril</div></div>
+    <div class="mes-card"><img src="2026/Destaque_Maio.jpeg" alt=""><div class="mes-label">Maio</div></div>
+    <div class="mes-card"><img src="2026/Destaque_Junho.jpeg" alt=""><div class="mes-label">Junho</div></div>
+    <div class="mes-card"><img src="2026/Destaque_Julho.jpeg" alt=""><div class="mes-label">Julho</div></div>
+    <div class="mes-card"><img src="2026/Destaque_Agosto.jpeg" alt=""><div class="mes-label">Agosto</div></div>
+    <div class="mes-card"><img src="2026/Destaque_Setembro.jpeg" alt=""><div class="mes-label">Setembro</div></div>
+    <div class="mes-card"><img src="2026/Destaque_Outubro.jpeg" alt=""><div class="mes-label">Outubro</div></div>
+    <div class="mes-card"><img src="2026/Destaque_Novembro.jpeg" alt=""><div class="mes-label">Novembro</div></div>
+    <div class="mes-card"><img src="2026/Destaque_Dezembro.jpeg" alt=""><div class="mes-label">Dezembro</div></div>
+  </div>
+</section>
+
+<!-- CABOS E auxiliar -->
+<section id="cabos-auxiliar">
+  <div class="secao-titulo">Cabos e auxiliares</div>
+  <div class="cabos-auxiliar-grid">
+    <div>
+      <div class="subsecao-titulo">Cabos</div>
+      <div class="posto-lista">
+        <div class="posto-item"><img src="2026/cabo2026-01.png" alt=""><div class="posto-nome">Moraes</div></div>
+        <div class="posto-item"><img src="2026/cabo2026-02.png" alt=""><div class="posto-nome">Haimer</div></div>
+        <div class="posto-item"><img src="2026/cabo2026-03.png" alt=""><div class="posto-nome">Piai</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="subsecao-titulo">auxiliares</div>
+      <div class="posto-lista">
+        <div class="posto-item"><img src="2026/auxiliar2026-01.png" alt=""><div class="posto-nome"></div> <strong>Franco</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-02.png" alt=""><div class="posto-nome"></div> <strong>Jhonatas</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-03.png" alt=""><div class="posto-nome"></div> <strong>Alexandro</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-04.png" alt=""><div class="posto-nome"></div> <strong>Martins</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-05.png" alt=""><div class="posto-nome"></div> <strong>Miguel</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-06.png" alt=""><div class="posto-nome"></div> <strong>Rodrigues</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-07.png" alt=""><div class="posto-nome"></div> <strong>Henrique</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-08.png" alt=""><div class="posto-nome"></div> <strong>Carvalho</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-09.png" alt=""><div class="posto-nome"></div> <strong>Pereira</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-10.png" alt=""><div class="posto-nome"></div> <strong>Sbrama</strong></div>
+        <div class="posto-item"><img src="2026/auxiliar2026-04.png" alt=""><div class="posto-nome"></div> <strong>César</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATIRADORES -->
+<section id="atiradores">
+  <div class="secao-titulo">Atiradores</div>
+  <div class="atiradores-lista" id="lista-atiradores"></div>
+</section>
+<div id="imageModal">
+    <span>&times;</span>
+    <img id="expandedImage">
+</div>
+<script>
+const nomes = [
+    "Pereira",
+    "Teixeira",
+    "Gustavo",
+    "Dias",
+    "Oliveira",
+    "Santos",
+    "Ferraz",
+    "Henrique",
+    "Rodrigues",
+    "Cruz",
+    "Bueno",
+    "Padovani",
+    "Leme",
+    "Antônio",
+    "Galvão",
+    "Da Costa",
+    "Miguel",
+    "Briola",
+    "Goulart",
+    "Pizzol",
+    "Benevides",
+    "Pierre",
+    "Kevin",
+    "Rickelme",
+    "Stéfano",
+    "Pires",
+    "Almeida",
+    "Franco",
+    "Piai",
+    "O. Teixeira",
+    "Luan",
+    "Carderelli",
+    "Alexandro",
+    "Yosef",
+    "A. Santos",
+    "Souza",
+    "Carvalho",
+    "Domingos",
+    "Bomfim",
+    "Melichenco",
+    "Sbrama",
+    "Vital",
+    "Marley",
+    "Júnior",
+    "Jhonatas",
+    "Martins",
+    "Orlandin",
+    "César",
+    "Matheus",
+    "Cardoso"
+];
+
+const lista = document.getElementById("lista-atiradores");
+
+for (let i = 1; i <= nomes.length; i++) {
+
+    const num = String(i).padStart(2, "0");
+
+    lista.innerHTML += `
+        <div class="atirador-item">
+            <div class="atirador-num">${num}</div>
+            <img src="2026/atirador2026-${num}.png" alt="">
+            <div class="atirador-nome">${nomes[i - 1]}</div>
+        </div>
+    `;
+}
+// ----------------------
+// Sistema de ampliar imagens
+// ----------------------
+
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("expandedImage");
+const fechar = modal.querySelector("span");
+
+document.querySelectorAll("img").forEach(img => {
+
+    img.addEventListener("click", function(e){
+
+        // Não amplia a imagem do modal
+        if(img.id === "expandedImage") return;
+
+        e.stopPropagation();
+
+        modal.style.display = "flex";
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+    });
+
+});
+
+fechar.onclick = () => {
+    modal.style.display = "none";
+}
+
+modal.onclick = (e) => {
+    if(e.target === modal){
+        modal.style.display = "none";
+    }
+}
+
+document.addEventListener("keydown", (e)=>{
+    if(e.key === "Escape"){
+        modal.style.display = "none";
+    }
+});
+img.onerror = function () {
+    this.src =
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3C/svg%3E";
+};
+</script>
+
+</body>
+</html>

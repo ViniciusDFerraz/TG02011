@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ações Cívicas 2026 – TG 02 011 Capivari</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --verde: #1B3A2D;
+    --verde-medio: #2D5C42;
+    --dourado: #B8973A;
+    --dourado-claro: #D4AF58;
+    --creme: #F5F0E8;
+    --cinza: #8A8A8A;
+    --branco: #FFFFFF;
+    --preto: #0E0E0E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--preto); color: var(--creme); }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14,14,14,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(184,151,58,0.2);
+    padding: 1rem 2rem; display: flex; align-items: center; gap: 2rem;
+  }
+  nav a { font-family: 'Oswald', sans-serif; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cinza); text-decoration: none; transition: color 0.2s; }
+  nav a:hover { color: var(--dourado); }
+  nav a.logo { color: var(--dourado-claro); font-size: 1rem; margin-right: auto; }
+
+  .page-header { padding: 4rem 2rem 2rem; border-bottom: 1px solid rgba(184,151,58,0.15); max-width: 1200px; margin: 0 auto; }
+  .breadcrumb { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cinza); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--dourado); text-decoration: none; }
+  .page-titulo { font-family: 'Oswald', sans-serif; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 600; color: var(--branco); line-height: 1.1; }
+  .page-titulo span { color: var(--dourado); }
+
+  .galeria-section { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .galeria-secao-titulo { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--dourado-claro); letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+  .galeria-secao-desc { font-size: 0.82rem; color: var(--cinza); margin-bottom: 1.5rem; }
+
+  .foto-destaque {
+    width: 100%; max-width: 800px; aspect-ratio: 16/9;
+    overflow: hidden; margin-bottom: 1.5rem;
+    border: 1px solid rgba(184,151,58,0.15);
+  }
+  .foto-destaque img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .grupo { margin-top: 2.5rem; }
+  .grupo-titulo {
+    font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--dourado); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .grupo-titulo::after { content: ''; flex: 1; height: 1px; background: rgba(184,151,58,0.18); }
+
+  .grupo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+
+  .foto-item { display: flex; flex-direction: column; }
+  .foto-item img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+    border: 1px solid rgba(184,151,58,0.1); transition: border-color 0.2s;
+  }
+  .foto-item img:hover { border-color: var(--dourado); }
+  .foto-legenda { margin-top: 0.5rem; font-size: 0.75rem; color: var(--cinza); line-height: 1.4; font-style: italic; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">TG 02 011</a>
+  <a href="ano-2026.html">← Turma 2026</a>
+  <a href="operacoes-2026.html">Operações</a>
+</nav>
+
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="index.html">Início</a> › <a href="ano-2026.html">2026</a> › Ações Cívicas
+  </div>
+  <div class="page-titulo">Ações <span>Cívicas</span> 2026</div>
+</div>
+
+<!-- GALERIA 1 -->
+<div class="galeria-section">
+  <div class="galeria-secao-titulo">Doação de Sangue</div>
+  <div class="galeria-secao-desc">Data · Local</div>
+  <div class="foto-destaque">
+    <img src="2026/doação_sangue.jpeg" alt="Doação de Sangue">
+  </div>
+  <div class="grupo">
+    <div class="grupo-titulo">Fotos</div>
+    <div class="grupo-grid">
+      <div class="foto-item"><img src="2026/doação_sangue-1.jpeg" alt=""><div class="foto-legenda">Legenda da foto 01</div></div>
+      <div class="foto-item"><img src="2026/doação_sangue-2.jpeg" alt=""><div class="foto-legenda">Legenda da foto 02</div></div>
+      <div class="foto-item"><img src="2026/doação_sangue-3.jpeg" alt=""><div class="foto-legenda">Legenda da foto 03</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- GALERIA 2 -->
+<div class="galeria-section">
+  <div class="galeria-secao-titulo">Censo da Pessoa com Deficiencia</div>
+  <div class="galeria-secao-desc">Data · Local</div>
+  <div class="foto-destaque">
+    <img src="2026/Censo-01.jpeg" alt="Censo da Pessoa com Deficiencia">
+  </div>
+  <div class="grupo">
+    <div class="grupo-titulo">Fotos</div>
+    <div class="grupo-grid">
+      <div class="foto-item"><img src="2026/Censo.jpeg" alt=""></div>
+      <div class="foto-item"><img src="2026/Censo-02.jpeg" alt=""></div>
+      <div class="foto-item"><img src="2026/Censo-03.jpeg" alt=""></div>
+      <div class="foto-item"><img src="2026/Censo-04.jpeg" alt=""></div>
+      <div class="foto-item"><img src="2026/Censo-05.jpeg" alt=""></div>
+      <div class="foto-item"><img src="2026/Censo-06.jpeg" alt=""></div>
+      <div class="foto-item"><img src="2026/Censo-07.jpeg" alt=""></div>
+      <div class="foto-item"><img src="2026/Censo-08.jpeg" alt=""></div>
+      <div class="foto-item"><img src="2026/Censo-09.jpeg" alt=""></div>
+    </div>
+  </div>
+</div>
+
+<!-- GALERIA 3 -->
+<div class="galeria-section">
+  <div class="galeria-secao-titulo">Doação de Alimentos</div>
+  <div class="galeria-secao-desc">Data · Local</div>
+  <div class="foto-destaque">
+    <img src="2026/doação_alimentos.jpeg" alt="Doação de Alimentos">
+  </div>
+  <div class="grupo">
+    <div class="grupo-titulo">Fotos</div>
+    <div class="grupo-grid">
+      <div class="foto-item"><img src="2026/casacrianca.jpeg" alt=""><div class="foto-legenda">Doação a Casa da Criança</div></div>
+      <div class="foto-item"><img src="2026/alimentos-2.jpeg" alt=""><div class="foto-legenda">Legenda da foto 02</div></div>
+      <div class="foto-item"><img src="2026/alimentos-3.jpeg" alt=""><div class="foto-legenda">Legenda da foto 03</div></div>
+    </div>
+  </div>
+</body>
+</html>
